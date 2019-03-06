@@ -1,0 +1,27 @@
+﻿@model BridgeProtocol.Integrations.Models.VerifyPassportLoginChallengeResponse
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login with Bridge Passport Example</title>
+</head>
+<body style="background-color: white; font-family:Arial; color:black;">
+    <h3 style="text-align:center;">Login Successful.</h3>
+    <div style="width:100%; text-align:center;">
+        <div style="width:100%; text-align:center;">
+            <div style="display:inline-block; margin-top:40px; text-align:left; padding: 20px;">
+                <center><img src="~/images/bridge_logo_black.png" style="width:150px; margin-bottom:20px;" /><br /></center>
+                <b>Id:</b> @Model.PassportDetails.Id
+                    @{
+                        foreach (var claim in Model.Claims)
+                        {
+                            var claimType = ((List<BridgeProtocol.Integrations.Models.ClaimType>)ViewData["ClaimTypes"]).Where(t => t.Id == claim.ClaimTypeId).FirstOrDefault(); ;
+                            <div><b>@claimType.Name</b> : @claim.ClaimValue</div>
+                        }
+                    }
+            </div>
+        </div>
+    </div>   
+</body>
+</html>

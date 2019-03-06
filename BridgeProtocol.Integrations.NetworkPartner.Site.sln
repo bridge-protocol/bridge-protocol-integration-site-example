@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BridgeProtocol.Integrations.NetworkPartner.Site", "BridgeProtocol.Integrations.NetworkPartner.Site\BridgeProtocol.Integrations.NetworkPartner.Site.csproj", "{0A075464-536D-4A6E-8A7C-32E63DCF64E7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BridgeProtocol.Integrations", "..\bridge-protocol-integrations-dotnet\BridgeProtocol.Integrations\BridgeProtocol.Integrations.csproj", "{EC4433CA-2160-4E61-B7FE-7E1464388113}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0A075464-536D-4A6E-8A7C-32E63DCF64E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A075464-536D-4A6E-8A7C-32E63DCF64E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A075464-536D-4A6E-8A7C-32E63DCF64E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A075464-536D-4A6E-8A7C-32E63DCF64E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57BA40D1-0169-48F5-AD5F-851907C6E771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57BA40D1-0169-48F5-AD5F-851907C6E771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57BA40D1-0169-48F5-AD5F-851907C6E771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57BA40D1-0169-48F5-AD5F-851907C6E771}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC4433CA-2160-4E61-B7FE-7E1464388113}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC4433CA-2160-4E61-B7FE-7E1464388113}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC4433CA-2160-4E61-B7FE-7E1464388113}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC4433CA-2160-4E61-B7FE-7E1464388113}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {03F00D20-F33F-41E6-8ECE-B732AC6F6A71}
+	EndGlobalSection
+EndGlobal
