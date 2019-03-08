@@ -40,16 +40,27 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
             {
                 response = _service.VerifyPassportLoginChallengeResponse(model.BridgePassport_LoginResponse, model.SigningToken, _claimTypes);
 
+                //Make sure we got a valid response
                 if (response == null)
                     throw new Exception("Error logging in with passport.");
 
+                //Make sure we aren't missing any claim types we asked for
                 if (response.MissingClaimTypes.Count > 0)
                     throw new Exception("Missing or invalid required claim types: " + string.Join(",", response.MissingClaimTypes));
+
+                //Verify all the claims we received were signed by known verification partners on the bridge network
+                if (response.UnknownSignerClaimTypes.Count > 0)
+                    throw new Exception("One or more claims were signed by an unknown signer.");
+
+                //Verify the passport isn't blacklisted
+                if (response.PassportDetails.IsBlacklisted)
+                    throw new Exception("Passport is blacklisted.");
             }
             catch(Exception ex)
             {
                 return new ObjectResult("Error logging in with passport: " + ex.Message);
             }
+
 
             //Get the claim types enum so we can provide the names in the UI
             ViewData["ClaimTypes"] = _service.GetClaimTypes();
