@@ -13,4 +13,8 @@
     <ProjectReference Include="..\..\bridge-protocol-integrations-dotnet\BridgeProtocol.Integrations\BridgeProtocol.Integrations.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\scripts\" />
+  </ItemGroup>
+
 </Project>

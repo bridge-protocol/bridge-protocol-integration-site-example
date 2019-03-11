@@ -30,7 +30,9 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddSession(options => {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -48,7 +50,7 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site
 
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
+            app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
