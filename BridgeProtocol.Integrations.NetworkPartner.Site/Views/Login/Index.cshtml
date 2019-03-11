@@ -11,7 +11,6 @@
     <div style="width:100%; text-align:center; margin-top:100px;">
         <form id="bridge_passport_login_form" method="post" onsubmit="return validateForm()">
             <!-- Required Block -->
-            <link rel="stylesheet" property="stylesheet" href="~/styles/bridge-login.css">
             <div id="bridge_passport_login">
                 @Html.HiddenFor(m => m.SigningToken)
                 <input id="bridge_protocol_passport_login_request" name="BridgePassport_LoginRequest" type="hidden" value="@Model.BridgePassport_LoginRequest" />
