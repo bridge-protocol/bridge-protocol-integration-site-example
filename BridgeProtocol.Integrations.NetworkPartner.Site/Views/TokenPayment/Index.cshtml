@@ -6,22 +6,36 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Payment with Bridge Passport Example</title>
+    <script>
+        function requestPayment() {
+            var event = new CustomEvent("bridge-protocol-payment-request", {
+                detail: {
+                    paymentIdentifier: "12345",
+                    paymentAmount: 1,
+                    paymentAddress: "AMMSokvGVXc6wq4rgt3jZ9DA2m83SXH6mo"
+                }
+            });
+            document.dispatchEvent(event);
+        }
+
+        requestPayment();
+    </script>
 </head>
 <body style="background-color: white; font-family:Arial; color:black;">
     <div style="width:100%; text-align:center; margin-top:100px;">
         <form id="bridge_passport_payment_form" method="post" onsubmit="return validateForm()">
             <!-- Required Block -->
             <div id="bridge_passport_payment">
-                <input id="bridge_passport_payment_identifier" name="BridgePassport_PaymentIdentifier" type="hidden" value="thispaymentidentifier" />
-                <input id="bridge_passport_payment_amount" name="BridgePassport_PaymentAmount" type="hidden" value="1" />
-                <input id="bridge_passport_payment_address" name="BridgePassport_PaymentAddress" type="hidden" value="AMMSokvGVXc6wq4rgt3jZ9DA2m83SXH6mo" />
                 <input id="bridge_passport_payment_transaction_id" name="BridgePassport_PaymentTransactionId" type="hidden" value="" />
             </div>
             <!-- End Required Block -->
         </form>
         <img src="~/images/bridge_logo_black.png" style="width:150px;" /><br />
-        <div>Send Token Payment with Bridge Passport</div>
+
+        <button onclick="requestPayment();">Request Payment from Bridge Passport</button>
     </div>
 </body>
 </html>
+
+
 

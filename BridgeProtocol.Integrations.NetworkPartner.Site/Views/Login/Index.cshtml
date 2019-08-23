@@ -6,6 +6,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login with Bridge Passport Example</title>
+    <script>
+    function login () {
+        var event = new CustomEvent("bridge-protocol-login-request", {
+            detail: {
+                loginRequest: '@Model.BridgePassport_LoginRequest'
+            }
+        });
+        document.dispatchEvent(event);
+    }
+    </script>
 </head>
 <body style="background-color: white; font-family:Arial; color:black;">
     <div style="width:100%; text-align:center; margin-top:100px;">
@@ -13,15 +23,14 @@
             <!-- Required Block -->
             <div id="bridge_passport_login">
                 @Html.HiddenFor(m => m.SigningToken)
-                <input id="bridge_protocol_passport_login_request" name="BridgePassport_LoginRequest" type="hidden" value="@Model.BridgePassport_LoginRequest" />
                 <input id="bridge_protocol_passport_login_response" name="BridgePassport_LoginResponse" type="hidden" value="" />
-                <input id="bridge_protocol_passport_login_passport_id" name="BridgePassport_PassportId" type="hidden" value="" />
             </div>
             <!-- End Required Block -->
         </form>
         <img src="~/images/bridge_logo_black.png" style="width:150px;" /><br />
-        <div>Login with Bridge Passport</div>
+        <button id="do_login" onclick="login();">Login with Bridge Passport</button>
     </div>
 </body>
 </html>
+
 
