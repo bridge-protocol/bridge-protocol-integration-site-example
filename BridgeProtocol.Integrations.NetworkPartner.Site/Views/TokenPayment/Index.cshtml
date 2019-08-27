@@ -18,7 +18,11 @@
             document.dispatchEvent(event);
         }
 
-        requestPayment();
+        document.addEventListener('bridge-protocol-payment-response', function (data) {
+            alert(JSON.stringify(data.detail));
+            document.getElementById("bridge_passport_payment_transaction_id").value = data.detail.transactionId;
+            document.forms[0].submit();
+        });
     </script>
 </head>
 <body style="background-color: white; font-family:Arial; color:black;">
