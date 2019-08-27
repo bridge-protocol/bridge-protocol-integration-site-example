@@ -11,10 +11,14 @@
         var event = new CustomEvent("bridge-protocol-login-request", {
             detail: {
                 loginRequest: '@Model.BridgePassport_LoginRequest'
-            }
+            }});
+            document.dispatchEvent(event);
+        }
+
+        document.addEventListener('bridge-protocol-login-response', function(data) {
+            document.getElementById("bridge_protocol_passport_login_response").value = data.detail.responseValue;
+            document.forms[0].submit();
         });
-        document.dispatchEvent(event);
-    }
     </script>
 </head>
 <body style="background-color: white; font-family:Arial; color:black;">
