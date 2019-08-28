@@ -16,7 +16,7 @@
         }
 
         document.addEventListener('bridge-protocol-login-response', function(data) {
-            document.getElementById("bridge_passport_login_response").value = data.detail.responseValue;
+            document.getElementById("bridge_passport_login_response").value = data.detail.loginResponse;
             document.forms[0].submit();
         });
     </script>

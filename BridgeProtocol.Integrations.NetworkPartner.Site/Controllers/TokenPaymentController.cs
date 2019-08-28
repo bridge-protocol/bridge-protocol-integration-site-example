@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BridgeProtocol.Integrations.NetworkPartner.Site.Models.ViewModels;
 using BridgeProtocol.Integrations.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -22,24 +23,30 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
         // GET: TokenPayment
         public IActionResult Index()
         {
-            _paymentIdentifier = Guid.NewGuid().ToString();
-            return View();
+            var passportId = _service.GetServerPassportId();
+            var network = "NEO";
+            var amount = 1;
+            var address = "ALEN8KC46GLaadRxaWdvYBUhdokT3RhxPC";
+            var identifier = Guid.NewGuid().ToString();
+
+            return View(new TokenPaymentViewModel
+            {
+                BridgeProtocol_PassportId = passportId,
+                BridgeProtocol_PaymentNetwork = network,
+                BridgeProtocol_PaymentAddress = address,
+                BridgeProtocol_PaymentAmount = amount,
+                BridgeProtocol_PaymentIdentifier = identifier,
+                BridgeProtocol_PaymentRequest = _service.CreatePassportPaymentRequest(network, amount, address, identifier)
+            });
         }
 
         // POST: TokenPayment
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Index(IFormCollection collection)
+        public IActionResult Index(TokenPaymentViewModel model)
         {
-            try
-            {
-                // TODO: Add insert logic here
-                return new OkObjectResult("Payment Sent on NEO, Tx: " + collection["BridgePassport_PaymentTransactionId"]);
-            }
-            catch
-            {
-                return View();
-            }
+            var res = _service.VerifyPassportPaymentResponse(model.BridgeProtocol_PaymentResponse);
+            return View(model);
         }
 
         [HttpGet]
