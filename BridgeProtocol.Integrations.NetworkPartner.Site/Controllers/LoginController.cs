@@ -11,7 +11,7 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
     public class LoginController : Controller
     {
         private ServiceWrapper _service;
-        private List<int> _claimTypes = new List<int> { 1,2,3,4,5 }; //Require Email address to be provided by the user
+        private List<int> _claimTypes = new List<int> { 3 }; //Require Email address to be provided by the user
         private int? _profileTypeId; // = 3;
 
         public LoginController(IConfiguration configuration)
