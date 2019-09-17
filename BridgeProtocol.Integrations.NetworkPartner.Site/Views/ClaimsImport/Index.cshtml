@@ -1,0 +1,37 @@
+﻿@model BridgeProtocol.Integrations.NetworkPartner.Site.Models.ViewModels.ClaimsImportViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Import Claims to Bridge Passport Example</title>
+    <script>
+        function requestClaimsImport() {
+            var event = new CustomEvent("bridge-protocol-claims-import-request", {
+                detail: {
+                    claimsImportRequest: '@Model.ClaimsImportRequest'
+                }
+            });
+            document.dispatchEvent(event);
+        }
+    </script>
+</head>
+<body style="background-color: white; font-family:Arial; color:black;">
+    <div style="width:100%; text-align:center; margin-top:100px;">
+        <img src="~/images/bridge_logo_black.png" style="width:150px;" /><br />
+        <form id="bridge_passport_payment_form" method="post">
+            <!-- Required Block -->
+            <div id="bridge_claims_import_request">
+                Request:
+                @Html.TextBoxFor(m => m.ClaimsImportRequest)<br />
+            </div>
+            <!-- End Required Block -->
+        </form>
+        <button onclick="requestClaimsImport();">Import Claims to Bridge Passport</button>
+    </div>
+</body>
+</html>
+
+
+
