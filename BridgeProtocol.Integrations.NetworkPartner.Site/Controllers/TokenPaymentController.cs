@@ -17,7 +17,12 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
 
         public TokenPaymentController(IConfiguration configuration)
         {
-            _service = new ServiceWrapper(configuration);
+            IConfigurationSection config = configuration.GetSection("Service");
+            string serviceUrl = config["Location"];
+            string securityHeaderKey = config["SecurityHeaderKey"];
+            string securityHeaderValue = config["SecurityHeaderValue"];
+
+            _service = new ServiceWrapper(serviceUrl, securityHeaderKey, securityHeaderValue);
         }
 
         // GET: TokenPayment
