@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using BridgeProtocol.Integrations.NetworkPartner.Site.Models;
 using Microsoft.Extensions.Configuration;
 using BridgeProtocol.Integrations.Services;
@@ -60,13 +61,16 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
                 //Verify the passport isn't blacklisted
                 if (response.PassportDetails.IsBlacklisted)
                     throw new Exception("Passport is blacklisted.");
+
+                HttpContext.Session.SetString("PassportPublicKey",response.PublicKey);
+                HttpContext.Session.SetString("PassportId", response.PassportId);
             }
             catch(Exception ex)
             {
                 return new ObjectResult("Error logging in with passport: " + ex.Message);
             }
 
-
+           
             //Get the claim types enum so we can provide the names in the UI
             ViewData["ClaimTypes"] = _service.GetClaimTypes();
 

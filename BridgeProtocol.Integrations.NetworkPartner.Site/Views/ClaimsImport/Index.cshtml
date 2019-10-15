@@ -20,14 +20,6 @@
 <body style="background-color: white; font-family:Arial; color:black;">
     <div style="width:100%; text-align:center; margin-top:100px;">
         <img src="~/images/bridge_logo_black.png" style="width:150px;" /><br />
-        <form id="bridge_passport_payment_form" method="post">
-            <!-- Required Block -->
-            <div id="bridge_claims_import_request">
-                Request:
-                @Html.TextBoxFor(m => m.ClaimsImportRequest)<br />
-            </div>
-            <!-- End Required Block -->
-        </form>
         <button onclick="requestClaimsImport();">Import Claims to Bridge Passport</button>
     </div>
 </body>

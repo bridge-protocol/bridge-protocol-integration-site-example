@@ -31,11 +31,9 @@
             <div id="bridge_passport_payment">
                 Amount: @Model.BridgeProtocol_PaymentAmount<br />
                 Address: @Model.BridgeProtocol_PaymentAddress<br />
-                PassportId: @Html.TextBoxFor(m => m.BridgeProtocol_PassportId)
-                Request:
-                @Html.TextBoxFor(m => m.BridgeProtocol_PaymentRequest)<br />
-                Response:
-                @Html.TextBoxFor(m => m.BridgeProtocol_PaymentResponse)
+                PassportId: @Model.BridgeProtocol_PassportId<br /><br />
+                @Html.HiddenFor(m => m.BridgeProtocol_PaymentRequest)
+                @Html.HiddenFor(m => m.BridgeProtocol_PaymentResponse)
             </div>
             <!-- End Required Block -->
         </form>
