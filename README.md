@@ -9,16 +9,5 @@
 The Bridge Protocol Site Integration Example demonstrates how to accept a Bridge Passport for Authentication and Authorization in an ASP.NET MVC Website.
 
 # Dependencies
-- Bridge Protocol Integration Wrapper for .NET (https://github.com/bridge-protocol/bridge-protocol-integrations-dotnet)
-
-# Integration with the Bridge Passport Extension
-For integration with the Bridge Passport for Authentication and Authorization, the following block must exist on the login page to facilitate the communication of the login request and response payloads between the site and the extension:
-
-```
-<div id="bridge_passport_login">
-     <input id="bridge_protocol_passport_login_request" type="hidden" />
-     <input id="bridge_protocol_passport_login_response" type="hidden" />
-     <input id="bridge_protocol_passport_login_passport_id" type="hidden" />
-</div>
-```
-Optionally, if the parent form is given id="bridge_passport_login_form", it will auto-submit when the passport response is provided.
+- Bridge Protocol Integration Service Runninng (node.js) (https://github.com/bridge-protocol/bridge-protocol-integration-service)
+- Bridge Protocol Integration Wrapper (.NET) (https://github.com/bridge-protocol/bridge-protocol-integrations-dotnet)
