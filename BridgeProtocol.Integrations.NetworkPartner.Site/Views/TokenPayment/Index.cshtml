@@ -18,7 +18,7 @@
 
         document.addEventListener('bridge-protocol-payment-response', function (data) {
             console.log(JSON.stringify(data.detail));
-            document.getElementById("BridgeProtocol_PaymentResponse").value = data.detail.paymentResponse;
+            document.getElementById("BridgeProtocol_PaymentResponse").value = data.detail;
             document.forms[0].submit();
         });
     </script>
