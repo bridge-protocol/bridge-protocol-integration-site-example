@@ -6,7 +6,7 @@
 <h3 align="center">Bridge Protocol Site Integration Example for .NET</h3>
 
 # Summary
-The Bridge Protocol Site Integration Example demonstrates how to accept a Bridge Passport for Authentication and Authorization in an ASP.NET MVC Website.
+The Bridge Protocol Site Integration Example demonstrates how to accept a Bridge Passport for Authentication and Authorization in an ASP.NET MVC Website as well as accept BRDG token payments.
 
 # Dependencies
 - Bridge Protocol Integration Service Runninng (node.js) (https://github.com/bridge-protocol/bridge-protocol-integration-service)
