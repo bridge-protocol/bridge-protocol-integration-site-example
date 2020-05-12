@@ -7,21 +7,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login with Bridge Passport Example</title>
     <script>
-    function login() {
-        //Verify the passport is installed / version is supported
-        if (window.bridgePassportVersion != "2.5") {
-            alert("Bridge Passport v2.5 is required to use this site.");
-            return;
-        }
-
-        //Dispatch the login request to the extension
-        var event = new CustomEvent("bridge-protocol-login-request", {
-            detail: {
-                loginRequest: '@Model.BridgePassport_LoginRequest'
+        function login() {
+            if (!window.bridgePassportVersion) {
+                alert("Bridge Passport not installed.");
             }
-        });
-        document.dispatchEvent(event);
-    }
+
+            let version = parseFloat(window.bridgePassportVersion);
+            if (version < 2.5) {
+                alert("Bridge Passport v2.5 or later is required to use this site.");
+                return;
+            }
+
+            //Dispatch the login request to the extension
+            var event = new CustomEvent("bridge-protocol-login-request", {
+                detail: {
+                    loginRequest: '@Model.BridgePassport_LoginRequest'
+                }
+            });
+            document.dispatchEvent(event);
+        }
 
     //Wireup the extension login response event
     document.addEventListener('bridge-protocol-login-response', function(data) {

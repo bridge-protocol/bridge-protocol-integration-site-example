@@ -14,5 +14,6 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Models.ViewModels
         public string BridgeProtocol_PaymentAddress { get; set; }
         public string BridgeProtocol_PaymentRequest { get; set; }
         public string BridgeProtocol_PaymentResponse { get; set; }
+        public bool BridgeProtocol_PaymentVerified { get; set; }
     }
 }

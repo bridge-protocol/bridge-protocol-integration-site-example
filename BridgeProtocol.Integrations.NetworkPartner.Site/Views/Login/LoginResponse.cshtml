@@ -1,4 +1,4 @@
-﻿@model BridgeProtocol.Integrations.Models.VerifyPassportLoginChallengeResponse
+﻿@model BridgeProtocol.Integrations.Models.VerifyAuthResponse
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,19 +7,30 @@
     <title>Login with Bridge Passport Example</title>
 </head>
 <body style="background-color: white; font-family:Arial; color:black;">
-    <h3 style="text-align:center;">Login Successful.</h3>
     <div style="width:100%; text-align:center;">
         <div style="width:100%; text-align:center;">
             <div style="display:inline-block; margin-top:40px; text-align:left; padding: 20px;">
                 <center><img src="~/images/bridge_logo_black.png" style="width:150px; margin-bottom:20px;" /><br /></center>
-                <b>Id:</b> @Model.PassportDetails.Id
+                <h3 style="text-align:center;">Login Successful.</h3>
+                <b>Passport Id:</b> @Model.PassportId
+                <div style="margin-top:10px;">
+                    <b>Claims:</b>
                     @{
                         foreach (var claim in Model.Claims)
                         {
-                            var claimType = ((List<BridgeProtocol.Integrations.Models.ClaimType>)ViewData["ClaimTypes"]).Where(t => t.Id == claim.ClaimTypeId).FirstOrDefault(); ;
-                            <div><b>@claimType.Name</b> : @claim.ClaimValue</div>
+                            <div><b>@claim.ClaimTypeId</b> : @claim.ClaimValue</div>
                         }
                     }
+                </div>
+                <div style="margin-top:10px;">
+                    <b>Blockchain Addresses:</b>
+                    @{
+                        foreach (var address in Model.BlockchainAddresses)
+                        {
+                            <div><b>@address.Network</b> : @address.Address</div>
+                        }
+                    }
+                </div>
             </div>
         </div>
     </div>   

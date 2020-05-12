@@ -12,8 +12,8 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
     public class LoginController : Controller
     {
         private ServiceWrapper _service;
-        private List<int> _claimTypes = new List<int> { 3 }; //Require Email address to be provided by the user
-        private int? _profileTypeId; // = 3;
+        private List<string> _claimTypes = new List<string> { "1","2","3" }; //Require Email address to be provided by the user
+        private List<string> _blockchainNetworks = new List<string> { "neo","eth" };
 
         public LoginController(IConfiguration configuration)
         {
@@ -28,10 +28,12 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            HttpContext.Session.SetString("InitSession", "true");
+
             var signingToken = Guid.NewGuid().ToString(); //You can use any signing token you want
             return View(new LoginWithBridgePassportViewModel
             {
-                BridgePassport_LoginRequest = _service.CreatePassportLoginChallengeRequest(signingToken, _profileTypeId, _claimTypes),
+                BridgePassport_LoginRequest = _service.CreateAuthRequest(signingToken, _claimTypes, _blockchainNetworks),
                 SigningToken = signingToken
             });
         }
@@ -39,27 +41,25 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
         [HttpPost]
         public IActionResult Index(LoginWithBridgePassportViewModel model)
         {
-            VerifyPassportLoginChallengeResponse response = null;
+            VerifyAuthResponse response = null;
 
             //Verify we got the passport and it's valid
             try
             {
-                response = _service.VerifyPassportLoginChallengeResponse(model.BridgePassport_LoginResponse, model.SigningToken, _claimTypes);
+                response = _service.VerifyAuthResponse(model.BridgePassport_LoginResponse, model.SigningToken);
 
                 //Make sure we got a valid response
                 if (response == null)
                     throw new Exception("Error logging in with passport.");
 
-                //Make sure we aren't missing any claim types we asked for
-                if (response.MissingClaimTypes.Count > 0)
-                    throw new Exception("Missing or invalid required claim types: " + string.Join(",", response.MissingClaimTypes));
+                //Evaluate response.claims to ensure they are valid and provided what is required
+                //Evaluate response.BlockchainAddresses to ensure the requested addresses were provided
 
-                //Verify all the claims we received were signed by known verification partners on the bridge network
-                if (response.UnknownSignerClaimTypes.Count > 0)
-                    throw new Exception("One or more claims were signed by an unknown signer.");
+                //Get the passport info
+                var passportDetails = _service.GetPassportDetails(response.PassportId);
 
                 //Verify the passport isn't blacklisted
-                if (response.PassportDetails.IsBlacklisted)
+                if (passportDetails.IsBlacklisted)
                     throw new Exception("Passport is blacklisted.");
 
                 HttpContext.Session.SetString("PassportPublicKey",response.PublicKey);

@@ -35,7 +35,7 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
             var claims = new List<Claim>();
             var claim = new Claim
             {
-                ClaimTypeId = 3,
+                ClaimTypeId = "3",
                 ClaimValue = "someuser@someplace.com",
                 CreatedOn = DateTimeUtility.GetUnixTime(DateTime.UtcNow),
                 ExpiresOn = 0

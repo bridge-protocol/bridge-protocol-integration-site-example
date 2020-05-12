@@ -28,16 +28,19 @@
         <img src="~/images/bridge_logo_black.png" style="width:150px;" /><br />
         <form id="bridge_passport_payment_form" method="post">
             <!-- Required Block -->
-            <div id="bridge_passport_payment">
+            <div id="bridge_passport_payment" style="@(Model.BridgeProtocol_PaymentVerified ? "display:none;":"")">
                 Amount: @Model.BridgeProtocol_PaymentAmount<br />
                 Address: @Model.BridgeProtocol_PaymentAddress<br />
                 PassportId: @Model.BridgeProtocol_PassportId<br /><br />
                 @Html.HiddenFor(m => m.BridgeProtocol_PaymentRequest)
                 @Html.HiddenFor(m => m.BridgeProtocol_PaymentResponse)
+                <button onclick="requestPayment();" type="button">Request Payment from Bridge Passport</button>
             </div>
             <!-- End Required Block -->
+            <div style="@(Model.BridgeProtocol_PaymentVerified ? "":"display:none;")">
+                Payment Response Verified Successfully
+            </div>
         </form>
-        <button onclick="requestPayment();">Request Payment from Bridge Passport</button>
     </div>
 </body>
 </html>

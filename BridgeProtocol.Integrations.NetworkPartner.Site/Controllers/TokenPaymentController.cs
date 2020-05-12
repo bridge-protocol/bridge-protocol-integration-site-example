@@ -29,7 +29,7 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
         public IActionResult Index()
         {
             var passportId = _service.GetServerPassportId();
-            var network = "NEO";
+            var network = "neo";
             var amount = 1;
             var address = "ALEN8KC46GLaadRxaWdvYBUhdokT3RhxPC";
             var identifier = Guid.NewGuid().ToString();
@@ -41,7 +41,7 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
                 BridgeProtocol_PaymentAddress = address,
                 BridgeProtocol_PaymentAmount = amount,
                 BridgeProtocol_PaymentIdentifier = identifier,
-                BridgeProtocol_PaymentRequest = _service.CreatePassportPaymentRequest(network, amount, address, identifier)
+                BridgeProtocol_PaymentRequest = _service.CreatePaymentRequest(network, amount, address, identifier)
             });
         }
 
@@ -50,16 +50,11 @@ namespace BridgeProtocol.Integrations.NetworkPartner.Site.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Index(TokenPaymentViewModel model)
         {
-            var res = _service.VerifyPassportPaymentResponse(model.BridgeProtocol_PaymentResponse);
-            return View(model);
-        }
+            var res = _service.VerifyPaymentResponse(model.BridgeProtocol_PaymentResponse);
+            if (res != null)
+                model.BridgeProtocol_PaymentVerified = true;
 
-        [HttpGet]
-        public IActionResult GetTransactionStatus(string transactionId)
-        {
-            var complete = _service.CheckBlockchainTransactionComplete("NEO", transactionId);
-            var details = _service.GetBlockchainTransactionDetails("NEO", transactionId);
-            return new ObjectResult(details);
+            return View(model);
         }
     }
 }
